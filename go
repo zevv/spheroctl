@@ -40,43 +40,8 @@ while 1:
                 exit(0)
             if event.key == ord('f'):
                 pygame.display.toggle_fullscreen()
-            if event.key == pygame.K_LEFT:
-                ang = ang - 30
-            if event.key == pygame.K_RIGHT:
-                ang = ang + 30
-            if event.key == pygame.K_UP:
-                r = r + 10
-            if event.key == pygame.K_DOWN:
-                r = r - 10
             if event.key == 32:
                 r = 0
-            if event.key == ord(','):
-                dang = dang - 10
-            if event.key == ord('.'):
-                dang = dang + 10
-            if event.key == ord('a'):
-                ang = -90
-                r = 250
-            if event.key == ord('w'):
-                ang = 0
-                r = 250
-            if event.key == ord('d'):
-                ang = 90
-                r = 250
-            if event.key == ord('x'):
-                ang = 180
-                r = 250
-       
-        if event.type == pygame.KEYUP:
-            if event.key == ord('a'):
-                r = 0
-            if event.key == ord('w'):
-                r = 0
-            if event.key == ord('d'):
-                r = 0
-            if event.key == ord('x'):
-                r = 0
-
 
         if event.type == pygame.USEREVENT:
             rn = r / 256
@@ -99,12 +64,32 @@ while 1:
             a = atan2(y-300, x-400)
             r = int(hypot(y-300, x-400))
             ang = int(a / 3.1415 * 180 + 90) % 360
-
-            if r > 250:
-                r = 250
-
             if not down:
                 r = 0
+
+    ks = pygame.key.get_pressed()
+    if ks[pygame.K_LEFT]:
+        ang = ang - 3
+    if ks[pygame.K_RIGHT]:
+        ang = ang + 3
+    if ks[pygame.K_UP]:
+        r = r + 3
+    if ks[pygame.K_DOWN]:
+        r = r - 3
+    if ks[ord(',')]:
+        ang = 0
+        r = 0
+        dang = dang - 3
+    if ks[ord('.')]:
+        ang = 0
+        r = 0
+        dang = dang + 3
+
+    if r < 0:
+        r = 0
+
+    if r > 250:
+        r = 250
 
     a = (ang - 90) / 180 * 3.1415
     x = int(400 + cos(a) * r)
