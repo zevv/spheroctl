@@ -79,7 +79,9 @@ while 1:
 
 
         if event.type == pygame.USEREVENT:
-            orb.roll(int(r), (ang + dang) % 360)
+            rn = r / 256
+            speed = int(255 * (rn * rn * rn))
+            orb.roll(speed, (ang + dang) % 360)
 
         if event.type == pygame.QUIT:
             orb.roll(0, 0)
